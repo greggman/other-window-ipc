@@ -1,0 +1,27 @@
+{
+  "name": "other-window-ipc",
+  "version": "0.0.1",
+  "description": "IPC between windows for Electron",
+  "main": "other-window-ipc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/greggman/other-window-ipc.git"
+  },
+  "keywords": [
+    "ipc",
+    "electron",
+    "window"
+  ],
+  "files": [
+    "other-window-ipc.js"
+  ],
+  "author": "Gregg Tavares",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/greggman/other-window-ipc/issues"
+  },
+  "homepage": "https://github.com/greggman/other-window-ipc#readme"
+}
