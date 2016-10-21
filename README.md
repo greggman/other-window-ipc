@@ -50,10 +50,12 @@ can pass muliple arguments, etc..
 
     otherIPC.send(arg1, arg2, arg3, ...);
 
+And listeners will receive those arguments
+
 ## Getting Ids
 
-This library doesn't deal with getting the ideas of the various windows from
-one window to the next. That's left as an excersize to the reader.
+This library doesn't deal with getting the ids of the various windows from
+one window to the next. That's left as an exercise to the reader.
 
 You can see one example the example folder
 
