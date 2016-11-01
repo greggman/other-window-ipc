@@ -23,7 +23,12 @@ if (process.type === 'renderer') {
       this.byId = {};
 
       ipcRenderer.on('relay', (...args) => {
-         this._handleRelayIPC.apply(this, args);
+        // Because IPC messages were getting injected
+        // deep in some stack in JavaScript we
+        // put them on a tick.
+        process.nextTick(() => {
+          this._handleRelayIPC(...args);
+        });
       });
     }
     _handleRelayIPC(event, senderId, eventName, ...data) {
