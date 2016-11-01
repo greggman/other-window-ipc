@@ -13,6 +13,7 @@ function createWindow (off, url) {
     y: off,
   });
   window.loadURL(url);
+  window.webContents.openDevTools();
   return window;
 }
 

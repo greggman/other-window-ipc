@@ -23,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/greggman/other-window-ipc/issues"
   },
-  "homepage": "https://github.com/greggman/other-window-ipc#readme"
+  "homepage": "https://github.com/greggman/other-window-ipc#readme",
+  "devDependencies": {
+    "electron": "^1.4.4"
+  }
 }
