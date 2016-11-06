@@ -22,8 +22,6 @@ if (process.type === 'renderer') {
         throw new Error("remoteStreamId already set");
       }
       this._remoteStreamId = remoteStreamId;
-      if (this._) {
-      }
     }
     send(...args) {
       if (!this._remoteStreamId) {
