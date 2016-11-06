@@ -9,6 +9,12 @@ So, this module.
 
 ## Usage
 
+There are `IPChannels` and `IPCSteams`. You can think of an `IPCChannel`
+just like an http listener on a port except instead of numbers we use strings.
+
+Any window can have multiple `IPCChannel`s. An `IPCChannel`s sole purpose
+is to listen for connections. Connections are `IPCStreams`
+
 In browser process
 
     require('other-window-ipc');
@@ -17,42 +23,61 @@ In renderer process
 
     *   For a window that just wants to listen for other windows
 
+            const otherWindowIPC = require('other-window-ipc');
 
-            const otherWindowIPC = require('../other-window-ipc');
+            const channelName = "blarg";
+            const ipcChannel = otherWindowIPC.createChannel(channelName);
 
-            otherWindowIPC.on('someEventName', function(event, data) {
+            ipcChannel.on('connect', (stream) => {
 
-              ...
+                // listen for events on stream
+                steam.on('foobar', (someArg, someOtherArg) => {
+                  console.log("got foobar:", someArg, someOtherArg);
+                });
 
-              // You can reply to sender if you want
-              event.sender.send('someOtherEventName', 'got:' + data + ' send it back');
+                // send something to other side
+                stream.send('moo', "said", "the cow");
             });
 
-    *   For a window that wants to send an ipc
+    *   For a window that wants to send a channel
 
-            const otherWindowIPC = require('../other-window-ipc');
+            const otherWindowIPC = require('other-window-ipc');
 
-            const otherIPC = otherWindowIPC.getById(otherWindowId);
+            const channelName = "blarg";
+            otherWindowIPC.createChannelStream(otherWindowId, channelName)
+            .then(stream => {
 
-            // To send a message
-            otherIPC.send('someEventName', 'hello again from other');
+                // listen for events on stream
+                steam.on('foobar', (someArg, someOtherArg) => {
+                  console.log("got foobar:", someArg, someOtherArg);
+                });
 
-            // To listen for a message from that window
-            otherIPC.on('someEventName', (event, args) => {
+                // send something to other side
+                stream.send('moo', "said", "the cow");
 
-               ...
-               // You can reply to sender if you want
-               event.sender.send('someOtherEventName', 'got:' + data + ' send it back');
+            })
+            .catch(err => {
+              console.log("err");
             });
 
 Note `send` works the same as the standard `EventEmitter.emit` in that you
 can pass muliple arguments, etc..
 
-    otherIPC.send(arg1, arg2, arg3, ...);
+    stream.send(arg1, arg2, arg3, ...);
 
 And listeners will receive those arguments
 
-## Getting Ids
+## Disconnecting
+
+To close a steam call `stream.close`. The corresponding stream on the
+other side will receive `disconnect` event. This is the only hardcoded
+event.  In other words
+
+    stream.on('disconnect', () => {
+       // stream.close was called on the other side
+    });
+
+## Getting Window Ids
 
 This library doesn't deal with getting the ids of the various windows from
 one window to the next. That's left as an exercise to the reader.
