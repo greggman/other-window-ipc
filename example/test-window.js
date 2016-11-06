@@ -4,15 +4,23 @@ const log = require('./log');
 
 function main(event, otherId) {
   var once = true;
-  var otherIPC = otherWindowIPC.getById(otherId);
-  otherIPC.on('hello', (event, args) => {
-    log("got msg from other:", args);
-    if (once) {
-      once = false;
-      otherIPC.send('hello', 'hello again from other');
-    }
+
+  otherWindowIPC.createChannelStream(otherId, "blarg")
+  .then(stream => {
+
+    stream.on('hello', (...args) => {
+      log("got msg from other:", ...args);
+      if (once) {
+        once = false;
+        stream.send('hello', 'hello again from other');
+      }
+    });
+    stream.send('hello', 'hello from other');
+
+  })
+  .catch(err => {
+    console.log(err);
   });
-  otherIPC.send('hello', 'hello from other');
 }
 
 ipcRenderer.on('getCommonId', main);

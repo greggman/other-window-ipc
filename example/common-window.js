@@ -3,10 +3,16 @@
 const otherWindowIPC = require('../other-window-ipc');
 const log = require('./log');
 
-otherWindowIPC.on('hello', function(event, data) {
-  log("got hello:", data);
-  event.sender.send('hello', 'got:' + data + ' send it back');
+const channel = otherWindowIPC.createChannel("blarg");
+channel.on('connect', stream => {
+
+  stream.on('hello', data => {
+    log("got hello:", data);
+    stream.send('hello', 'got:' + data + " send it back");
+  });
+
 });
+
 
 
 
