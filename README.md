@@ -44,7 +44,7 @@ In renderer process
             const otherWindowIPC = require('other-window-ipc');
 
             const channelName = "blarg";
-            otherWindowIPC.createChannelStream(otherWindowId, channelName)
+            otherWindowIPC.createChannelStream(channelName)
             .then(stream => {
 
                 // listen for events on stream
@@ -77,13 +77,17 @@ event.  In other words
        // stream.close was called on the other side
     });
 
-## Getting Window Ids
+## Channels Must have Unique names
 
-This library doesn't deal with getting the ids of the various windows from
-one window to the next. That's left as an exercise to the reader.
+If you have multiple windows that both want to create a channel
+
+
+## example
 
 You can see one example the example folder
 
     electron example/main.js
+
+
 
 

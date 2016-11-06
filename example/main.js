@@ -21,17 +21,9 @@ let commonWindow;
 let test1Window;
 let test2Window;
 
-// I have no idea if there is an easier way for
-// a render process to get ids of other windows
-// other-window-ipc leaves that up to the app
-electron.ipcMain.on('getCommonId', (event, arg) => {
-  event.sender.send('getCommonId', commonWindow.webContents.id);
-});
-
-
 app.on('ready', () => {
   commonWindow = createWindow(100, `file://${__dirname}/common-window.html`);
-  test1Window = createWindow(200, `file://${__dirname}/test-window.html`);
-  test2Window = createWindow(300, `file://${__dirname}/test-window.html`);
+  test1Window = createWindow(200, `file://${__dirname}/test-window.html?Jack`);
+  test2Window = createWindow(300, `file://${__dirname}/test-window.html?Jill`);
 });
 

@@ -16,7 +16,9 @@
     "window"
   ],
   "files": [
-    "other-window-ipc.js"
+    "other-window-ipc.js",
+    "ipc.js",
+    "relay.js"
   ],
   "author": "Gregg Tavares",
   "license": "MIT",
