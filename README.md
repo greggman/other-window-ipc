@@ -88,6 +88,45 @@ You can see one example the example folder
 
     electron example/main.js
 
+## Changelog
 
+*   1.2.0
+
+    *   Allow main/browser process to also create channels
+        and streams
+
+*   1.1.0
+
+    *   Keep channel to target mapping in main process
+
+        This means you no longer need a to know the id
+        of the window. Just call `createChannel` and pass
+        a name. Then use that name in `createChannelStream`
+
+*   1.0.1
+
+    *   Bug fixes
+
+*   1.0.0
+
+    *   Change to use channels and streams so
+        you can easily have multiple streams per
+        channel
+
+*   0.0.1
+
+    Initial release
+
+## To Do
+
+*   Make channel.close close all streams?
+
+    Currently all channel close does is unregister the channel.
+    All streams are still open and will continue to funciton.
+
+    Maybe that's fine. The channel itself is just a way to
+    accept streams. If you want to close all your streams
+    then keep your own list of streams. Probably much easier
+    than having channel keep track of streams.
 
 
