@@ -17,8 +17,7 @@
   ],
   "files": [
     "other-window-ipc.js",
-    "ipc.js",
-    "relay.js"
+    "lib"
   ],
   "author": "Gregg Tavares",
   "license": "MIT",
@@ -28,5 +27,8 @@
   "homepage": "https://github.com/greggman/other-window-ipc#readme",
   "devDependencies": {
     "electron": "^1.4.4"
+  },
+  "dependencies": {
+    "debug": "^2.2.0"
   }
 }
