@@ -88,46 +88,46 @@ There are only 2 functions on `otherWindowIPC`
 
 #### `otherWindowIPC.createChannel(channelId)`
 
-    returns an `IPCChannel` and registers the channel.
+returns an `IPCChannel` and registers the channel.
 
 #### `otherWindowIPC.createChannelStream(channelId)`
 
-    returns a `Promise` that resolves to an `IPCStream` once
-    it has connected to the channel. Rejects if there is
-    no such channel
+returns a `Promise` that resolves to an `IPCStream` once
+it has connected to the channel. Rejects if there is
+no such channel
 
 ### `IPCChannel`
 
-    This is returned by `createChannel`. It is an `EventEmitter`
-    that emits just one event `connect` that gets passed an `IPCStream`.
+This is returned by `createChannel`. It is an `EventEmitter`
+that emits just one event `connect` that gets passed an `IPCStream`.
 
 #### `ipcChannel.close()`
 
-    Unregisters the channel. Note: Streams created for that channel
-    will still be open and functioning. Closing the channel basically
-    just frees the channelId to be used to create a new channel
+Unregisters the channel. Note: Streams created for that channel
+will still be open and functioning. Closing the channel basically
+just frees the channelId to be used to create a new channel
 
 ### `IPCStream`
 
-    This is created by calling `createChannelStream` or is emitted
-    in the `connect` event on an `IPCChannel`.
+This is created by calling `createChannelStream` or is emitted
+in the `connect` event on an `IPCChannel`.
 
-    It is an `EventEmitter`. Any arguments passed to `send` will
-    arrive at the corresponding `IPCStream` on the other side.
-    Arguments must be `JSON.stringify`able.
+It is an `EventEmitter`. Any arguments passed to `send` will
+arrive at the corresponding `IPCStream` on the other side.
+Arguments must be `JSON.stringify`able.
 
-    Otherwise see [`EventEmitter` for docs](https://nodejs.org/api/events.html#events_class_eventemitter).
-    on adding and removing listeners.
+Otherwise see [`EventEmitter` for docs](https://nodejs.org/api/events.html#events_class_eventemitter).
+on adding and removing listeners.
 
 #### `ipcStream.send(type, ...args)`
 
-    This is just like the standard `EventEmitter.emit` except
-    the event will appear on the corresponding `IPCStream`.
+This is just like the standard `EventEmitter.emit` except
+the event will appear on the corresponding `IPCStream`.
 
 #### `ipcStream.close()`
 
-    Closes the stream. The corresponding `IPCStream` on the other side
-    will receive a `disconnect` event.
+Closes the stream. The corresponding `IPCStream` on the other side
+will receive a `disconnect` event.
 
 ## Install
 
