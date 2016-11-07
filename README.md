@@ -24,7 +24,7 @@ process.
 
 In renderer or browser process
 
-*   For a window that just wants to listen for other windows
+*   For a process that just wants to listen for other processes
 
         const otherWindowIPC = require('other-window-ipc');
 
@@ -34,15 +34,15 @@ In renderer or browser process
         ipcChannel.on('connect', (stream) => {
 
             // listen for events on stream
-            steam.on('foobar', (someArg, someOtherArg) => {
-              console.log("got foobar:", someArg, someOtherArg);
+            steam.on('moo', (someArg, someOtherArg) => {
+              console.log("got moo:", someArg, someOtherArg);
             });
 
             // send something to other side
-            stream.send('moo', "said", "the cow");
+            stream.send('foobar', "foo", "bar");
         });
 
-*   For a window that wants to send a channel
+*   For a process that wants to open a stream on a channel
 
         const otherWindowIPC = require('other-window-ipc');
 
