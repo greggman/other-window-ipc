@@ -116,13 +116,14 @@ It is an `EventEmitter`. Any arguments passed to `send` will
 arrive at the corresponding `IPCStream` on the other side.
 Arguments must be `JSON.stringify`able.
 
-Otherwise see [`EventEmitter` for docs](https://nodejs.org/api/events.html#events_class_eventemitter).
+Otherwise see [`EventEmitter` for docs](https://nodejs.org/api/events.html#events_class_eventemitter)
 on adding and removing listeners.
 
 #### `ipcStream.send(type, ...args)`
 
 This is just like the standard `EventEmitter.emit` except
-the event will appear on the corresponding `IPCStream`.
+the event will appear on the corresponding `IPCStream` on the
+other side.
 
 #### `ipcStream.close()`
 
@@ -135,7 +136,7 @@ will receive a `disconnect` event.
 
 ## Example
 
-You can see a working example the example folder
+You can see a working example in the example folder
 
     git clone https://github.com/greggman/other-window-ipc.git
     npm install
@@ -184,7 +185,7 @@ You can see a working example the example folder
 
 *   Should it not make instances?
 
-    Currently `require('other-window-ipc`) makes an instance
+    Currently `require('other-window-ipc')` makes an instance
     of `IPCManager` and returns that instance. It's now ready
     to use. Because `IPCManager` needs to use global services
     like `electron.ipcMain` and `electron.ipcRenderer` there
@@ -192,7 +193,11 @@ You can see a working example the example folder
 
     On the other hand you could pass in some kind of prefix
     that would allow multiple `IPCManager`s to function.
-    Not really sure what the point would be
+    Not really sure what the point would be. Could also
+    pass in an implemention of `ipcMain` or `ipcRenderer`.
+
+    If someone really needs this we file an issue and explain.
+    It would be a breaking change.
 
 *   Abstract to the point where you can run channels on top of
     channels.
