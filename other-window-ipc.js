@@ -1,13 +1,13 @@
 "use strict";
 
-if (process.type === 'renderer') {
+if (process.type === 'browser') {
 
-  module.exports = require('./ipc');
-
-} else {
-
-  require('./relay');
+  require('./lib/ipc-relay');
 
 }
+
+module.exports = require('./lib/ipc');
+
+
 
 
