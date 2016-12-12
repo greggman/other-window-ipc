@@ -1,6 +1,6 @@
 {
   "name": "other-window-ipc",
-  "version": "1.2.2",
+  "version": "1.3.0",
   "description": "IPC between windows for Electron",
   "main": "other-window-ipc.js",
   "scripts": {
