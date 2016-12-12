@@ -144,6 +144,12 @@ You can see a working example in the example folder
 
 ## Changelog
 
+*   1.3.0
+
+    *   make it so by defalt `createChannelStream` waits for
+        the channel. You can pass a timeout if you want it to
+        reject if the channel does not exist
+
 *   1.2.0
 
     *   Allow main/browser process to also create channels
